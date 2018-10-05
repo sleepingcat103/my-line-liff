@@ -4,7 +4,7 @@ var changeColorButton = wrapper.querySelector("[data-action=change-color]");
 var undoButton = wrapper.querySelector("[data-action=undo]");
 var sendButton = document.getElementById("sendmessagebutton");
 var closeWindowButton = document.getElementById("closewindowbutton");
-var canvas = wrapper.querySelector("canvas");
+var canvasObj = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {
     // It's Necessary to use an opaque color when saving image as JPEG;
     // this option can be omitted if only saving as PNG or SVG
@@ -120,9 +120,9 @@ function dataURLToBlob(dataURL) {
 
 function resizeCanvas() {
     var ratio =  Math.max(window.devicePixelRatio || 1, 1);
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
-    canvas.getContext("2d").scale(ratio, ratio);
+    canvasObj.width = canvasObj.offsetWidth * ratio;
+    canvasObj.height = canvasObj.offsetHeight * ratio;
+    canvasObj.getContext("2d").scale(ratio, ratio);
     signaturePad.clear(); // otherwise isEmpty() might return incorrect value
 }
 
@@ -131,8 +131,15 @@ resizeCanvas();
 
 function Send(dataURL){
     var blob = dataURLToBlob(dataURL);
-    var url = window.URL.createObjectURL(blob).replace('blob:', '');
-    window.alert(url);
+    var url = window.URL.createObjectURL(blob);
+
+    var a = document.createElement("a");
+    a.style = "display: none";
+    a.href = url;
+    a.download = 'test.jpg';
+
+    document.body.appendChild(a);
+    a.click();
 
     liff.sendMessages([{
         type: 'image',
