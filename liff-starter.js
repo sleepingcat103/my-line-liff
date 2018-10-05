@@ -141,11 +141,14 @@ function Send(dataURL){
 
     document.body.appendChild(a);
     a.click();
+    window.URL.revokeObjectURL(url);
+
+    window.alert(document.domain);
 
     liff.sendMessages([{
         type: 'image',
-        originalContentUrl: url,
-        previewImageUrl: url
+        originalContentUrl: 'https://' + document.domain + '/test.jpg',
+        previewImageUrl: 'https://' + document.domain + '/test.jpg'
     }]).then(function () {
         closeWindowButton.click();
     }).catch(function (error) {
