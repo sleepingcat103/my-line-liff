@@ -163,6 +163,7 @@ function Send(dataURL){
         },
         success: function (res, status) {
             console.log(res);
+            window.alert(res);
             // liff.sendMessages([{
             //     type: 'image',
             //     originalContentUrl: 'https://' + document.domain + '/imgs/' + res + '.jpg',
@@ -178,5 +179,5 @@ function Send(dataURL){
         },
         complete: function(data) {
         }
-      });
+    });
 }
