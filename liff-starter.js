@@ -67,7 +67,7 @@ function initializeApp(data) {
         if (signaturePad.isEmpty()) {
             alert("draw something");
         } else {
-            var dataURL = signaturePad.toDataURL();
+            var dataURL = signaturePad.toDataURL("image/jpeg");
             Send(dataURL);
         }
     });
@@ -134,13 +134,13 @@ function Send(dataURL){
     var url = window.URL.createObjectURL(blob);
     //window.alert(url);
 
-    // var a = document.createElement("a");
-    // a.style = "display: none";
-    // a.href = url;
-    // a.download = 'test.jpg';
+    var a = document.createElement("a");
+    a.style = "display: none";
+    a.href = url;
+    a.download = 'test.jpg';
 
-    // document.body.appendChild(a);
-    // a.click();
+    document.body.appendChild(a);
+    a.click();
 
     liff.sendMessages([{
         type: 'image',
