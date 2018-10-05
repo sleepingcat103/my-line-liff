@@ -65,7 +65,7 @@ function initializeApp(data) {
     // sendMessages call
     sendButton.addEventListener('click', function () {
         if (signaturePad.isEmpty()) {
-            alert("畫布還是空的呢");
+            alert("draw something");
         } else {
             var dataURL = signaturePad.toDataURL();
             Send(dataURL);
@@ -132,6 +132,7 @@ resizeCanvas();
 function Send(dataURL){
     var blob = dataURLToBlob(dataURL);
     var url = window.URL.createObjectURL(blob);
+    window.alert(url);
 
     liff.sendMessages([{
         type: 'image',
