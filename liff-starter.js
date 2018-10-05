@@ -1,5 +1,6 @@
 window.onload = function (e) {
     liff.init(function (data) {
+        window.alert(JSON.stringify(data));
         initializeApp(data);
     });
 };
@@ -29,10 +30,6 @@ function initializeApp(data) {
         liff.sendMessages([{
             type: 'text',
             text: "You've successfully sent a message! Hooray!"
-        }, {
-            type: 'sticker',
-            packageId: '2',
-            stickerId: '144'
         }]).then(function () {
             window.alert("Message sent");
         }).catch(function (error) {
