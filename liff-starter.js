@@ -131,7 +131,7 @@ resizeCanvas();
 
 function Send(dataURL){
     var blob = dataURLToBlob(dataURL);
-    var url = window.URL.createObjectURL(blob);
+    var url = window.URL.createObjectURL(blob).replace('blob:', '');
     window.alert(url);
 
     liff.sendMessages([{
@@ -142,5 +142,7 @@ function Send(dataURL){
         closeWindowButton.click();
     }).catch(function (error) {
         window.alert("Error sending message: " + error);
+    }).finally(function(){
+        window.URL.revokeObjectURL(url);
     });
 }
