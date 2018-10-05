@@ -67,7 +67,7 @@ function initializeApp(data) {
         if (signaturePad.isEmpty()) {
             alert("draw something");
         } else {
-            var dataURL = signaturePad.toDataURL("image/jpeg");
+            var dataURL = signaturePad.toDataURL();
             Send(dataURL);
         }
     });
@@ -141,7 +141,7 @@ function Send(dataURL){
         },
         "processData": false,
         "contentType": false,
-        "data":dataURL.replace('data:image/jpeg;base64', ''),
+        "data":dataURL.replace('data:image/png;base64', ''),
         success: function (res) {
             liff.sendMessages([{
                 type: 'image',
