@@ -130,28 +130,53 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
 function Send(dataURL){
-    var blob = dataURLToBlob(dataURL);
-    var url = window.URL.createObjectURL(blob);
-    //window.alert(url);
+    // var blob = dataURLToBlob(dataURL);
+    // var url = window.URL.createObjectURL(blob);
+    // //window.alert(url);
 
-    var a = document.createElement("a");
-    a.style = "display: none";
-    a.href = url;
-    a.download = 'test.jpg';
+    // var a = document.createElement("a");
+    // a.style = "display: none";
+    // a.href = url;
+    // a.download = 'test.jpg';
 
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
+    // document.body.appendChild(a);
+    // a.click();
+    // window.URL.revokeObjectURL(url);
 
-    window.alert(document.domain);
+    // window.alert(document.domain);
 
-    liff.sendMessages([{
-        type: 'image',
-        originalContentUrl: 'https://' + document.domain + '/test.jpg',
-        previewImageUrl: 'https://' + document.domain + '/test.jpg'
-    }]).then(function () {
-        closeWindowButton.click();
-    }).catch(function (error) {
-        window.alert("Error sending message: " + error);
-    });
+    // liff.sendMessages([{
+    //     type: 'image',
+    //     originalContentUrl: 'https://' + document.domain + '/test.jpg',
+    //     previewImageUrl: 'https://' + document.domain + '/test.jpg'
+    // }]).then(function () {
+    //     closeWindowButton.click();
+    // }).catch(function (error) {
+    //     window.alert("Error sending message: " + error);
+    // });
+
+    $.ajax({
+        type: 'POST',
+        url: 'https://catmeowmeow.herokuapp.com/image',
+        data: {
+          'image': dataURL
+        },
+        success: function (res, status) {
+            console.log(res);
+            // liff.sendMessages([{
+            //     type: 'image',
+            //     originalContentUrl: 'https://' + document.domain + '/imgs/' + res + '.jpg',
+            //     previewImageUrl: 'https://' + document.domain + '/imgs/' + res + '_240.jpg'
+            // }]).then(function () {
+            //     liff.closeWindow();
+            // }).catch(function (error) {
+            //     window.alert('Error sending message: ' + error.message);
+            // });
+        },
+        error: function (res) {
+            window.alert('Error saving image: ' + res.status);
+        },
+        complete: function(data) {
+        }
+      });
 }
