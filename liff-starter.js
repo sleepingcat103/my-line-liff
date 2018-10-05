@@ -67,7 +67,7 @@ function initializeApp(data) {
         if (signaturePad.isEmpty()) {
             alert("draw something");
         } else {
-            var dataURL = signaturePad.toDataURL();
+            var dataURL = signaturePad.toDataURL("image/jpeg");
             Send(dataURL);
         }
     });
@@ -142,7 +142,5 @@ function Send(dataURL){
         closeWindowButton.click();
     }).catch(function (error) {
         window.alert("Error sending message: " + error);
-    }).finally(function(){
-        window.URL.revokeObjectURL(url);
     });
 }
