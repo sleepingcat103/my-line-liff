@@ -4,19 +4,26 @@ var changeColorButton = wrapper.querySelector("[data-action=change-color]");
 var undoButton = wrapper.querySelector("[data-action=undo]");
 var sendButton = document.getElementById("sendmessagebutton");
 var closeWindowButton = document.getElementById("closewindowbutton");
-var canvas = wrapper.querySelector("canvas");
-var signaturePad = new SignaturePad(canvas, {
-    // It's Necessary to use an opaque color when saving image as JPEG;
-    // this option can be omitted if only saving as PNG or SVG
-    backgroundColor: 'rgb(255, 255, 255)'
-});
+var canvas = document.getElementById("mycanvas");
+var signaturePad = new SignaturePad(canvas);
+var ctx = canvas.getContext("2d");
+    var img = new Image();
+    img.src = "http://dl.stickershop.line.naver.jp/products/0/0/1/1156759/android/stickers/6386152.png";
+// var signaturePad = new SignaturePad(canvas, {
+//     // It's Necessary to use an opaque color when saving image as JPEG;
+//     // this option can be omitted if only saving as PNG or SVG
+//     backgroundColor: 'rgb(255, 255, 255)'
+// });
 
 window.onload = function (e) {
     liff.init(function (data) {
         //window.alert(JSON.stringify(data));
         initializeApp(data);
     });
+    ctx.drawImage(img, 0, 0);
 };
+
+
 
 function initializeApp(data) {
     // document.getElementById('languagefield').textContent = data.language;
@@ -124,6 +131,8 @@ function resizeCanvas() {
     canvas.height = canvas.offsetHeight * ratio;
     canvas.getContext("2d").scale(ratio, ratio);
     signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+    
+    ctx.drawImage(img, 0, 0);
 }
 
 window.addEventListener("resize", resizeCanvas);
