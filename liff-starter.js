@@ -69,6 +69,8 @@ function initializeApp(data) {
         if (signaturePad.isEmpty()) {
             alert("draw something");
         } else {
+            sendButton.innerText = 'Sending';
+            sendButton.setAttribute('disabled','disabled');
             var dataURL = signaturePad.toDataURL();
             Send(dataURL);
         }
@@ -157,6 +159,10 @@ function Send(dataURL){
         },
         error: function () {
             window.alert('Error sending message: ' + error.message);
+        },
+        always: function(){
+            sendButton.removeAttribute('disabled');
+            sendButton.innerText = 'Send';
         }
     });
 }
