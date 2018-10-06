@@ -69,8 +69,8 @@ function initializeApp(data) {
         if (signaturePad.isEmpty()) {
             alert("draw something");
         } else {
-            sendButton.innerText = 'Sending';
-            sendButton.setAttribute('disabled','disabled');
+            this.innerText = 'Sending';
+            this.setAttribute('disabled','disabled');
             var dataURL = signaturePad.toDataURL();
             Send(dataURL);
         }
