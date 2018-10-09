@@ -14,7 +14,6 @@ var signaturePad = new SignaturePad(canvas, {
 
 window.onload = function (e) {
     liff.init(function (data) {
-        //window.alert(JSON.stringify(data));
         initializeApp(data);
     });
 };
@@ -51,6 +50,8 @@ function initializeApp(data) {
         if (signaturePad.isEmpty()) {
             alert("draw something");
         } else {
+            this.innerText = 'Sending';
+            this.setAttribute('disabled','disabled');
             var dataURL = signaturePad.toDataURL();
             Send(dataURL);
         }
@@ -94,6 +95,10 @@ function Send(dataURL){
         },
         error: function () {
             window.alert('Error sending message: ' + error.message);
+        },
+        always: function(){
+            sendButton.removeAttribute('disabled');
+            sendButton.innerText = 'Send';
         }
     });
 }
