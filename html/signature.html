@@ -1,0 +1,25 @@
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<link rel="stylesheet" href="../style.css">
+
+<div id="signature-pad" class="signature-pad">
+    <div class="signature-pad--body"  width="100%" height="100%">
+        <canvas id="mycanvas"></canvas>
+    </div>
+    <div class="signature-pad--footer">
+        <div class="description">Sign above</div>
+
+        <div class="signature-pad--actions">
+        <div>
+            <button type="button" class="button clear" data-action="clear">Clear</button>
+            <button type="button" class="button" data-action="change-color">Color</button>
+            <button type="button" class="button" data-action="undo">Undo</button>
+        </div>
+        <div>
+            <button id="sendmessagebutton">Send</button>
+            <button id="closewindowbutton">Leave</button>
+        </div>
+    </div>
+    <script src="../liff-starter.js"></script>
+</div>

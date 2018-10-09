@@ -1,0 +1,93 @@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    window.onload = function (e) {
+        var day = new Date();
+        document.getElementById("date").setAttribute("value", day.getFullYear() + 
+        "-" + 
+        (((day.getMonth()+1) > 9) ? (day.getMonth()+1) : ('0' + (day.getMonth()+1))) + 
+        "-" + 
+        (day.getDate()>9 ? day.getDate(): ('0'+day.getDate()) ));
+        console.log($('input:checked').val())
+        console.log($('#date').val())
+        console.log($('#textItem').val())
+        console.log($('#texMoney').val())
+        console.log($('#textMemo').val())
+        console.log($('#selProperty').val())
+    }
+    document.getElementById("send").addEventListener("click", function(){
+
+
+    });
+</script>
+
+<table width="98%" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFEB9B" style="Border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td align="center">
+                <table width="99%" border="0" cellpadding="6" cellspacing="0" id="tblbook" name="tblbook" bgcolor="#dddddd"
+                    class="TableLineDotOrange">
+                    <tbody>
+                        <tr>
+                            <th>記帳類型：</th>
+                            <td>
+                                <input type="radio" name="rdoType" id="rdoType1" value="in" checked="" ><label>收入</label>
+                                <input type="radio" name="rdoType" id="rdoType2" value="out" ><label>支出</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>帳目日期：</th>
+                            <td><input id="date" type="date">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="DivTypeForm" style="display:block;">
+                    <table width="99%" border="0" cellpadding="6" cellspacing="0" class="TableLineDotOrange">
+                        <tbody>
+                            <tr>
+                                <th>項目：</th>
+                                <td>
+                                    <input type="text" name="textItem" id="textItem" style="width:150px" value="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>金額：</th>
+                                <td>
+                                    <input type="text" name="texMoney" id="texMoney" style="width:150px" value="">
+                                    (<div id="currency" style="display:inline">臺幣</div>)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>備註：</th>
+                                <td><textarea id="textMemo" name="textMemo" style="width:95%;height:30px"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th>必要性：</th>
+                                <td><select name="selProperty" id="selProperty">
+                                        <option value="N">需要</option>
+                                        <option value="W">想要</option>
+                                        <option value="I">忽略</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div>
+                    <button id="send">Send</button>
+                    <button id="clear">Clear</button>
+                    <button id="close">Leave</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div id="history"></div>
+            </td>
+        </tr>
+    </tbody>
+</table>
