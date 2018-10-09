@@ -5,40 +5,20 @@ var undoButton = wrapper.querySelector("[data-action=undo]");
 var sendButton = document.getElementById("sendmessagebutton");
 var closeWindowButton = document.getElementById("closewindowbutton");
 var canvas = document.getElementById("mycanvas");
-var signaturePad = new SignaturePad(canvas);
-var ctx = canvas.getContext("2d");
-    var img = new Image();
-    img.src = "http://dl.stickershop.line.naver.jp/products/0/0/1/1156759/android/stickers/6386152.png";
-// var signaturePad = new SignaturePad(canvas, {
-//     // It's Necessary to use an opaque color when saving image as JPEG;
-//     // this option can be omitted if only saving as PNG or SVG
-//     backgroundColor: 'rgb(255, 255, 255)'
-// });
+//var signaturePad = new SignaturePad(canvas);
+var signaturePad = new SignaturePad(canvas, {
+    // It's Necessary to use an opaque color when saving image as JPEG;
+    // this option can be omitted if only saving as PNG or SVG
+    backgroundColor: 'rgb(255, 255, 255)'
+});
 
 window.onload = function (e) {
     liff.init(function (data) {
         //window.alert(JSON.stringify(data));
         initializeApp(data);
     });
-    ctx.drawImage(img, 0, 0);
 };
-
-
-
 function initializeApp(data) {
-    // document.getElementById('languagefield').textContent = data.language;
-    // document.getElementById('viewtypefield').textContent = data.context.viewType;
-    // document.getElementById('useridfield').textContent = data.context.userId;
-    // document.getElementById('utouidfield').textContent = data.context.utouId;
-    // document.getElementById('roomidfield').textContent = data.context.roomId;
-    // document.getElementById('groupidfield').textContent = data.context.groupId;
-
-    // openWindow call
-    // document.getElementById('openwindowbutton').addEventListener('click', function () {
-    //     liff.openWindow({
-    //         url: 'https://line.me'
-    //     });
-    // });
 
     clearButton.addEventListener("click", function (event) {
         signaturePad.clear();
@@ -61,9 +41,6 @@ function initializeApp(data) {
       
         signaturePad.penColor = color;
     });
-
-
-
     // closeWindow call
     closeWindowButton.addEventListener('click', function () {
         liff.closeWindow();
@@ -78,52 +55,7 @@ function initializeApp(data) {
             Send(dataURL);
         }
     });
-
-    //get profile call
-    // document.getElementById('getprofilebutton').addEventListener('click', function () {
-    //     liff.getProfile().then(function (profile) {
-    //         document.getElementById('useridprofilefield').textContent = profile.userId;
-    //         document.getElementById('displaynamefield').textContent = profile.displayName;
-
-    //         var profilePictureDiv = document.getElementById('profilepicturediv');
-    //         if (profilePictureDiv.firstElementChild) {
-    //             profilePictureDiv.removeChild(profilePictureDiv.firstElementChild);
-    //         }
-    //         var img = document.createElement('img');
-    //         img.src = profile.pictureUrl;
-    //         img.alt = "Profile Picture";
-    //         profilePictureDiv.appendChild(img);
-
-    //         document.getElementById('statusmessagefield').textContent = profile.statusMessage;
-    //         toggleProfileData();
-    //     }).catch(function (error) {
-    //         window.alert("Error getting profile: " + error);
-    //     });
-    // });
 }
-
-// function toggleProfileData() {
-//     var elem = document.getElementById('profileinfo');
-//     if (elem.offsetWidth > 0 && elem.offsetHeight > 0) {
-//         elem.style.display = "none";
-//     } else {
-//         elem.style.display = "block";
-//     }
-// }
-function dataURLToBlob(dataURL) {
-    // Code taken from https://github.com/ebidel/filer.js
-    var parts = dataURL.split(';base64,');
-    var contentType = parts[0].split(":")[1];
-    var raw = window.atob(parts[1]);
-    var rawLength = raw.length;
-    var uInt8Array = new Uint8Array(rawLength);
-  
-    for (var i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
-    }
-  
-    return new Blob([uInt8Array], { type: contentType });
-  }
 
 function resizeCanvas() {
     var ratio =  Math.max(window.devicePixelRatio || 1, 1);
@@ -131,8 +63,6 @@ function resizeCanvas() {
     canvas.height = canvas.offsetHeight * ratio;
     canvas.getContext("2d").scale(ratio, ratio);
     signaturePad.clear(); // otherwise isEmpty() might return incorrect value
-    
-    ctx.drawImage(img, 0, 0);
 }
 
 window.addEventListener("resize", resizeCanvas);

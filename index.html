@@ -1,3 +1,28 @@
+
+<script type="text/javascript">
+    window.onload = function (e) {
+        var money = document.getElementById("money");
+        var draw = document.getElementById("draw");
+        var mainDiv = document.getElementById("main");
+        mainDiv.innerHTML = '<object type="text/html" data="./html/account-book.html" width="100%" height="100%"></object>';
+        var main = "money";
+
+        money.addEventListener("click", function (event) {
+            if(main != "money"){
+                mainDiv.innerHTML = '<object type="text/html" data="./html/account-book.html" width="100%" height="100%"></object>';
+                main = "money"
+            }
+        });
+        draw.addEventListener("click", function (event) {
+            if(main != "draw"){
+                mainDiv.innerHTML = '<object type="text/html" data="./html/signature.html" width="100%" height="100%"></object>';
+                main = "draw";
+            }
+        });
+    };
+    
+</script>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIFF Starter</title>
@@ -5,27 +30,20 @@
 </head>
 
 <body>
-    <div id="signature-pad" class="signature-pad">
-        <div class="signature-pad--body">
-          <canvas id="mycanvas"></canvas>
-        </div>
-        <div class="signature-pad--footer">
-          <div class="description">Sign above</div>
-    
-          <div class="signature-pad--actions">
-            <div>
-              <button type="button" class="button clear" data-action="clear">Clear</button>
-              <button type="button" class="button" data-action="change-color">Color</button>
-              <button type="button" class="button" data-action="undo">Undo</button>
-            </div>
-            <div>
-                <button id="sendmessagebutton">Send</button>
-                <button id="closewindowbutton">Leave</button>
-              </div>
-          </div>
-        </div>
-      </div>
-
+    <div id="main" class="main">
+    </div>
+    <table class="footer">
+        <tbody>
+            <tr>
+                <td class="main-td">
+                    <ul class="main-ul">
+                        <li class="menutop"><input id="money" type="button" class="menu-button" value="記帳"></li>
+                        <li class="menutop"><input id="draw" type="button" class="menu-button" value="畫畫"></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <!-- <div id="profileinfo">
         <h2>Profile</h2>
         <a href="#" onclick="toggleProfileData()">Close Profile</a>
@@ -76,10 +94,7 @@
             </tr>
         </table>
     </div> -->
-    
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="liff-starter.js"></script>
 </body>
